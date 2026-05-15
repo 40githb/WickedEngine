@@ -1,0 +1,100 @@
+wicked-soccer/
+├── README.md                          # Project overview
+├── CONTRIBUTING.md                    # How to contribute (Git workflow, code style)
+├── .gitignore                         # Exclude build artifacts, IDE files
+│
+├── CMakeLists.txt                     # Root CMake (modified from WE)
+├── cmake/
+│   ├── FindImGui.cmake                # Dear ImGui module
+│   └── FindPhysX.cmake                # PhysX module (to add)
+│
+├── src/
+│   ├── engine/                        # Original Wicked Engine code (minimal modifications)
+│   │   ├── ...                        # Keep original WE structure intact
+│   │   └── README.md                  # "DO NOT MODIFY UNNECESSARILY"
+│   │
+│   ├── soccer/                        # ALL soccer game code goes here
+│   │   ├── CMakeLists.txt
+│   │   │
+│   │   ├── physics/                   # Ball physics, Magnus effect, PhysX integration
+│   │   │   ├── Ball.h / Ball.cpp
+│   │   │   ├── BallPhysics.h / BallPhysics.cpp
+│   │   │   ├── MagnusEffect.h / MagnusEffect.cpp
+│   │   │   └── PhysXIntegration.h / PhysXIntegration.cpp
+│   │   │
+│   │   ├── animation/                 # Motion matching, IK, animation system
+│   │   │   ├── MotionMatching.h / MotionMatching.cpp
+│   │   │   ├── AnimationDatabase.h / AnimationDatabase.cpp
+│   │   │   ├── IKSolver.h / IKSolver.cpp
+│   │   │   └── SoccerAnimationComponent.h / SoccerAnimationComponent.cpp
+│   │   │
+│   │   ├── gameplay/                  # Player control, input, mechanics
+│   │   │   ├── PlayerController.h / PlayerController.cpp
+│   │   │   ├── InputManager.h / InputManager.cpp
+│   │   │   ├── SkillMoveSystem.h / SkillMoveSystem.cpp
+│   │   │   └── GameRules.h / GameRules.cpp
+│   │   │
+│   │   ├── core/                      # Game loop, match state, entities
+│   │   │   ├── Match.h / Match.cpp
+│   │   │   ├── Player.h / Player.cpp
+│   │   │   ├── Team.h / Team.cpp
+│   │   │   └── GameState.h / GameState.cpp
+│   │   │
+│   │   └── SoccerGame.h / SoccerGame.cpp  # Main entry point for soccer subsystem
+│   │
+│   ├── tools/                         # Editor tools, UI, helpers
+│   │   ├── CMakeLists.txt
+│   │   │
+│   │   ├── editor/                    # Dear ImGui editor UI
+│   │   │   ├── SoccerEditor.h / SoccerEditor.cpp
+│   │   │   ├── PhysicsDebugger.h / PhysicsDebugger.cpp
+│   │   │   ├── AnimationInspector.h / AnimationInspector.cpp
+│   │   │   └── PlayerStatsEditor.h / PlayerStatsEditor.cpp
+│   │   │
+│   │   ├── data_pipeline/             # Animation import, mesh processing
+│   │   │   ├── AnimationImporter.h / AnimationImporter.cpp
+│   │   │   ├── MotionCaptureProcessor.h / MotionCaptureProcessor.cpp
+│   │   │   └── MeshOptimizer.h / MeshOptimizer.cpp
+│   │   │
+│   │   └── utils/                     # Helper functions, logging, profiling
+│   │       ├── Logger.h / Logger.cpp
+│   │       ├── Profiler.h / Profiler.cpp
+│   │       └── Config.h / Config.cpp
+│   │
+│   └── main.cpp                       # Entry point (modified WE main)
+│
+├── assets/
+│   ├── models/                        # Player models, pitch, stadiums
+│   │   ├── players/
+│   │   ├── pitch/
+│   │   └── stadiums/
+│   │
+│   ├── animations/                    # Motion capture data
+│   │   ├── raw/                       # Original FBX/GLTF files
+│   │   ├── processed/                 # Converted to engine format
+│   │   └── database/                  # Motion matching database
+│   │
+│   ├── textures/
+│   ├── shaders/
+│   └── audio/
+│
+├── docs/
+│   ├── ARCHITECTURE.md                # System design overview
+│   ├── PHASE_1_CHECKLIST.md           # Phase 1 sprint plan
+│   ├── PHYSICS_DESIGN.md              # Ball physics, PhysX setup
+│   ├── ANIMATION_DESIGN.md            # Motion matching, IK details
+│   ├── GAMEPLAY_DESIGN.md             # Mechanics, input, skill moves
+│   ├── CONTRIBUTING.md                # Git workflow, code style
+│   └── API.md                         # Public API documentation
+│
+├── tests/
+│   ├── CMakeLists.txt
+│   ├── physics_tests/
+│   ├── animation_tests/
+│   └── gameplay_tests/
+│
+├── build/                             # Generated (in .gitignore)
+├── bin/                               # Compiled binaries (in .gitignore)
+└── .github/
+    └── workflows/
+        └── build.yml                  # CI/CD (auto-build on push)
