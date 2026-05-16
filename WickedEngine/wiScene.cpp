@@ -7313,25 +7313,25 @@ namespace wi::scene
 					// Find the nearest point on each edge.
 
 					// Edge 0,1
-					XMVECTOR Point1 = DirectX::Internal::PointOnLineSegmentNearestPoint(p0, p1, Center);
+					 // XMVECTOR Point1 = DirectX::Internal::PointOnLineSegmentNearestPoint(p0, p1, Center);
 
 					// If the distance to the center of the sphere to the point is less than 
 					// the radius of the sphere then it must intersect.
-					Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point1)), RadiusSq));
+					// Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point1)), RadiusSq));
 
 					// Edge 1,2
-					XMVECTOR Point2 = DirectX::Internal::PointOnLineSegmentNearestPoint(p1, p2, Center);
+					 // XMVECTOR Point2 = DirectX::Internal::PointOnLineSegmentNearestPoint(p1, p2, Center);
 
 					// If the distance to the center of the sphere to the point is less than 
 					// the radius of the sphere then it must intersect.
-					Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point2)), RadiusSq));
+					// Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point2)), RadiusSq));
 
 					// Edge 2,0
-					XMVECTOR Point3 = DirectX::Internal::PointOnLineSegmentNearestPoint(p2, p0, Center);
+					 // XMVECTOR Point3 = DirectX::Internal::PointOnLineSegmentNearestPoint(p2, p0, Center);
 
 					// If the distance to the center of the sphere to the point is less than 
 					// the radius of the sphere then it must intersect.
-					Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point3)), RadiusSq));
+					// Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point3)), RadiusSq));
 
 					bool intersects = XMVector4EqualInt(XMVectorAndCInt(Intersection, NoIntersection), XMVectorTrueInt());
 
@@ -7342,23 +7342,25 @@ namespace wi::scene
 						{
 							// If the sphere center's projection on the triangle plane is not within the triangle,
 							//	determine the closest point on triangle to the sphere center
-							float bestDist = XMVectorGetX(XMVector3LengthSq(Point1 - Center));
-							bestPoint = Point1;
-
+							XMVECTOR Point1 = Point0;
+							 float bestDist = XMVectorGetX(XMVector3LengthSq(Point1 - Center));
+							bestPoint = Point1;							
+                            /*
 							float d = XMVectorGetX(XMVector3LengthSq(Point2 - Center));
 							if (d < bestDist)
 							{
 								bestDist = d;
 								bestPoint = Point2;
 							}
-							d = XMVectorGetX(XMVector3LengthSq(Point3 - Center));
+							d = XMVectorGetX(XMVector3LengthSq(Point3 - Center)); 
 							if (d < bestDist)
 							{
 								bestDist = d;
 								bestPoint = Point3;
 							}
-						}
-						XMVECTOR intersectionVec = Center - bestPoint;
+						*/
+					}
+					XMVECTOR intersectionVec = Center - bestPoint;
 						XMVECTOR intersectionVecLen = XMVector3Length(intersectionVec);
 
 						float depth = sphere.radius - XMVectorGetX(intersectionVecLen);
@@ -7620,22 +7622,19 @@ namespace wi::scene
 					// Find the nearest point on each edge.
 
 					// Edge 0,1
-					XMVECTOR Point1 = DirectX::Internal::PointOnLineSegmentNearestPoint(p0, p1, Center);
-
+								XMVECTOR Point1 = wi::math::ClosestPointOnLineSegment(p0, p1, Center);
 					// If the distance to the center of the sphere to the point is less than 
 					// the radius of the sphere then it must intersect.
 					Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point1)), RadiusSq));
 
 					// Edge 1,2
-					XMVECTOR Point2 = DirectX::Internal::PointOnLineSegmentNearestPoint(p1, p2, Center);
-
+								XMVECTOR Point2 = wi::math::ClosestPointOnLineSegment(p1, p2, Center);
 					// If the distance to the center of the sphere to the point is less than 
 					// the radius of the sphere then it must intersect.
 					Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point2)), RadiusSq));
 
 					// Edge 2,0
-					XMVECTOR Point3 = DirectX::Internal::PointOnLineSegmentNearestPoint(p2, p0, Center);
-
+								XMVECTOR Point3 = wi::math::ClosestPointOnLineSegment(p2, p0, Center);
 					// If the distance to the center of the sphere to the point is less than 
 					// the radius of the sphere then it must intersect.
 					Intersection = XMVectorOrInt(Intersection, XMVectorLessOrEqual(XMVector3LengthSq(XMVectorSubtract(Center, Point3)), RadiusSq));
